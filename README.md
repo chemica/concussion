@@ -1,8 +1,22 @@
 # Concussion
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/concussion`. To experiment with that code, run `bin/console` for an interactive prompt.
+Sucker Punch is an awesome gem which allows in-process background jobs. If you want to run jobs at a particular time,
+however, there is a downside. Jobs are only held in memory, so restarting the process will kill any pending jobs.
 
-TODO: Delete this and the text above, and describe your gem
+Most web apps will be using some kind of data store however, so Concussion allows them to be persisted.
+
+## WARNING
+
+Concussion is currently untested code. It has not been used in production and has no automated test suite. Use at your 
+own risk. I cannot be held responsible for any loss of data, sanity or clients that may result from use of this code.
+
+The interface may also change radically in the following versions.
+
+Currently only Redis can be used as a data store.
+
+The gem has been published mainly as a placeholder.
+
+You have been warned.
 
 ## Installation
 
@@ -22,20 +36,59 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Concussion won't do much on its own. It needs to connect to a persistent storage, and for that it needs an adapter. For
+now it comes bundled with a Redis adapter, but that will be extracted into its own gem in due course.
 
-## Development
+The adapter is a class with a simple interface, described in the redis class adapter class comments.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+To use Concussion in a Rails project, add an initializer containing something along the lines of the following code:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+# after_initialize is used to allow Redis to initialise first
+Rails.application.config.after_initialize do
+  namespace = "concussion-persistence"
+  redis = Redis.new(:host => "localhost", :port => 6379)
+  Concussion.store = Concussion::RedisAdapter.new(redis: redis, namespace: namespace)
+  Concussion.init
+end
+```
+ 
+Jobs any jobs which are set to run while the server is offline will run immediately on the initializer being run. For 
+this reason the initializer must be wrapped in an 'after_initialize' block to ensure all other components of the 
+application are ready for use.
+
+When defining a job, use the following form:
+
+```ruby
+class DoSomethingJob
+  include SuckerPunch::Job
+  prepend Concussion::Persist
+
+  def perform(opts = {})
+    MyThingDoer.new(opts).do_thing
+  end
+
+end
+```
+
+And call it with:
+
+```ruby
+run_at = Time.now + 5.hours
+DoSomethingJob.new.async.later run_at, opts
+```
+
+All done.
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/concussion. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/chemica/concussion. This project is 
+intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the 
+[Contributor Covenant](contributor-covenant.org) code of conduct. Or something. These words were automatically
+added to this gem, but they are good words so they can stay.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
