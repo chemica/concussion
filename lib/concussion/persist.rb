@@ -1,8 +1,11 @@
 module Concussion
   module Persist
     def perform(*args)
-      Concussion.retire @guid
-      super *args
+      begin
+        super *args
+      ensure
+        Concussion.retire @guid
+      end
     end
 
     def later(time, *args)
