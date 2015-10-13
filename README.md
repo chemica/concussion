@@ -1,6 +1,6 @@
 # Concussion
 
-Sucker Punch is an awesome gem which allows in-process background jobs. If you want to run jobs at a particular time,
+[Sucker Punch](https://github.com/brandonhilkert/sucker_punch) is an awesome gem which allows in-process background jobs. If you want to run jobs at a particular time,
 however, there is a downside. Jobs are only held in memory, so restarting the process will kill any pending jobs.
 
 Most web apps will be using some kind of data store however, so Concussion allows them to be persisted.
@@ -103,8 +103,9 @@ All done.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/chemica/concussion. This project is 
 intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the 
-[Contributor Covenant](contributor-covenant.org) code of conduct. Or something. These words were automatically
-added to this gem, but they are good words so they can stay.
+[Contributor Covenant](https://github.com/chemica/concussion/blob/master/CODE_OF_CONDUCT.md) code of conduct. 
+
+Or something. These words were automatically added to this gem, but they are good words so they can stay.
 
 
 ## License
