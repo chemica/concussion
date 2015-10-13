@@ -103,8 +103,9 @@ All done.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/chemica/concussion. This project is 
 intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the 
-[Contributor Covenant](contributor-covenant.org) code of conduct. Or something. These words were automatically
-added to this gem, but they are good words so they can stay.
+[Contributor Covenant](https://github.com/chemica/concussion/blob/master/CODE_OF_CONDUCT.md) code of conduct. 
+
+Or something. These words were automatically added to this gem, but they are good words so they can stay.
 
 
 ## License
