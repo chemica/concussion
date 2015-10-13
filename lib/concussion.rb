@@ -1,4 +1,6 @@
 require "concussion/version"
+require "concussion/redis_adapter"
+require "concussion/persist"
 
 module Concussion
 
