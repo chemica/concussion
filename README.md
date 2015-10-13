@@ -1,6 +1,6 @@
 # Concussion
 
-Sucker Punch is an awesome gem which allows in-process background jobs. If you want to run jobs at a particular time,
+[Sucker Punch](https://github.com/brandonhilkert/sucker_punch) is an awesome gem which allows in-process background jobs. If you want to run jobs at a particular time,
 however, there is a downside. Jobs are only held in memory, so restarting the process will kill any pending jobs.
 
 Most web apps will be using some kind of data store however, so Concussion allows them to be persisted.
