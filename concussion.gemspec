@@ -12,11 +12,10 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{An addition to the Suckerpunch gem to allow delayed jobs that survive a server reset.}
   spec.description   = %q{Sucker Punch is an awesome gem which allows background tasks to be run from the current
                           process. They can be set to run in the future, but they will disappear and not get run if the
-                          server or process running the jobs is stopped or restarted. Concussion uses the Ruby 2.x
-                          'prepend' feature to provide a thin wrapper around Suckerpunch job objects, persisting them to
-                          an external storage system of your choice. When the server is restarted, any jobs unprocessed
-                          jobs will be run immediately while future jobs will be reinstated to be run at the
-                          appropriate time.}
+                          server or process running the jobs is stopped or restarted. Concussion provides a thin wrapper
+                          around Suckerpunch job objects, persisting them to an external storage system of your choice.
+                          When the server is restarted, any unprocessed jobs will be run immediately while future jobs
+                          will be reinstated to be run at the appropriate time.}
   spec.homepage      = "https://github.com/chemica/concussion"
   spec.license       = "MIT"
 
