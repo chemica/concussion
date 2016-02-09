@@ -9,6 +9,8 @@ Most web apps will be using some kind of data store however, so Concussion allow
 
 Concussion is currently untested, proof-of-concept code. It has not been used in production and has no automated test suite. Use at your own risk. I cannot be held responsible for any loss of data, sanity or clients that may result from use of this code.
 
+Concussion is probably not compatible with Suckerpunch v2.x after the move to use Concurrent-Ruby under the hood (instead of Celluloid) and the interface change. If you want to play around with this project, limit Suckerpunch to v1.x in your Gemfile.
+
 The interface may also change radically in the following versions.
 
 Currently only Redis can be used as a data store.
